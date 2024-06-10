@@ -13,6 +13,8 @@
 - Use postman to check the CRUD of users
 
 # Follow the following tutorial for implementing the basics of REST 
+- Create a table "expense" using migration
+- Generate a Model and CRUD files using gii
 - [Generate a Module](https://www.youtube.com/watch?v=1OmNBN5CuUs&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=7)
 - Configure the module in the config/web.php (see 'modules' in the config file)
 - Perform 'http://localhost:8080/module_id' to check it works perfectly
