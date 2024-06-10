@@ -4,8 +4,10 @@ namespace app\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
+use yii\base\Response;
 use app\models\User;
-use app\models\SignupForm;
+// use yii\web\Response;
+use yii\web\NotFoundHttpException;
 
 class UserController extends ActiveController
 {
@@ -15,49 +17,78 @@ class UserController extends ActiveController
     {
         $actions = parent::actions();
         unset($actions['create']);
-        // unset($actions['update']);
-        // unset($actions['delete']);
+        unset($actions['update']);
+        unset($actions['delete']);
         return $actions;
     }
 
     public function actionCreate()
     {
-        $user= new $this->modelClass;
+        $user = new $this->modelClass;
         if($user->load(Yii::$app->request->post(), '')){
 
-            return $user;
-            // return "bkgjdfbgjdbg";
-            
-            // $user->password = $user
-            // $user->setPassword($user->password);
-            // $user->generateAuthKey();
-            // $user->generatePasswordResetToken();
-            // $user->generateEmailVerificationToken();
-            // return ($user->save());
+            if($user->validate()){
+                $user->setPassword($user->password);
+                $user->generateAuthKey();
+                $user->generatePasswordResetToken();
+                $user->generateEmailVerificationToken();
+                $user->save();
+                return ([
+                    'status'=> 'success',
+                    'data'=> $user,
+                ]);
+            }else{
+                Yii::$app->response->statusCode = 422;
+                return [
+                    'status' => 'error',
+                    'errors' => $user->errors,
+                ];
+            }
         }
+    }
 
-        return false;
-
-
-        //$model -> load(Yii::$app->request->getBodyParams());
-        // $model->load(Yii::$app->request->post(), '');
+    public function actionDelete($id)
+    {
+        $model = $this->findModel($id);
         
-        // return $model->password;
+        if ($model->delete()) {
+            return [
+                'status' => 'success',
+                'message' => 'User deleted successfully.',
+            ];
+        } else {
+            Yii::$app->response->statusCode = 500;
+            return [
+                'status' => 'error',
+                'message' => 'Failed to delete the user.',
+            ];
+        }
+    }
 
-        // if ($model->load(Yii::$app->request->getBodyParams())) {
-        //     // return ['status' => 'success', 'data' => $model];
-        //     return "jflggl";
-        // }
-        // else{
-        //     return ['status'=> 'error','errors'=> $model->errors];
-        // }
-        
-        
-        // if ($model->load(Yii::$app->request->getBodyParams(),'') && $model->save()) {
-        //     return ['status' => 'success', 'data' => $model];
-        // }
-        // else{
-        //     return ['status'=> 'error','errors'=> $model->errors];
-        // }
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+        $model->load(Yii::$app->request->post(), '');
+        if ($model->validate() && $model->save()) {
+            return [
+                'status' => 'success',
+                'message' => 'User updated successfully.',
+                'data' => $model,
+            ];
+        } else {
+            Yii::$app->response->statusCode = 422;
+            return [
+                'status' => 'error',
+                'errors' => $model->errors,
+            ];
+        }
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException('The requested user does not exist.');
     }
 }
