@@ -36,15 +36,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'password_reset_token', 'auth_key', 'verification_key'], 'required'],
-            [['created_at', 'updated_at'], 'safe'],
-            
-            ['username', 'string', 'max' => 55],
-  
-            ['email', 'email'],
-
-            ['password', 'string', 'min'=>8, 'max'=> 255],
-            ['password', 'validatePassword']
+            [['username', 'email', 'password'], 'required'],
+            [['username', 'email', 'password', 'password_reset_token', 'auth_key', 'verification_key'], 'string', 'max' => 255],
+            ['username', 'unique', 'targetClass' => 'app\models\User', 'message' => 'This username has already taken.'],
+            ['email','unique', 'targetClass' => '\app\models\User', 'message'=> 'This email has already taken'],
+            [['created_at', 'updated_at'], 'integer'],
+            // ['password', 'validatePassword'] 
         ];
     }
 
