@@ -12,11 +12,11 @@
 - Configure the web.php to perform REST
 - Use postman to check the CRUD of users
 
-# Create Module and try REST on it
+# Follow the following tutorial for implementing the basics of REST 
 - [Generate a Module](https://www.youtube.com/watch?v=1OmNBN5CuUs&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=7)
 - Configure the module in the config/web.php (see 'modules' in the config file)
 - Perform 'http://localhost:8080/module_id' to check it works perfectly
-- Try to follow the following tutorial for the basics of REST 
+- 
     - 
 
 
