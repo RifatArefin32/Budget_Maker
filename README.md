@@ -19,11 +19,13 @@
 - Configure the module in the config/web.php (see 'modules' in the config file)
 - Perfrom GET request for expense/ particular expense
 - Configure the request to define the parsers at config/web.php
-- 
-- 
+- Create "modules/budget/controller/ExpenseController" and make Create, Update, Delete function
+- Http Bearar Token Authentication
+    
 
 ## Follow Step by Step to Learn Yii2 REST Basics
 - [Generate a Model and CRUD using /gii](https://www.youtube.com/watch?v=OVOy00vdCdY&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=7)
 - [Generate Module to setup REST APIs and Perform GET request](https://www.youtube.com/watch?v=1OmNBN5CuUs&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=6)
-- [Perform CREATE, UPDATE and DELETE request methods]()
-
+- [Perform CREATE, UPDATE and DELETE request methods](https://www.youtube.com/watch?v=_4ALKYLvTmY&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=8)
+- [Http Bearer Token Authentication](https://www.youtube.com/watch?v=copVdsoelHw&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=14)
+- []

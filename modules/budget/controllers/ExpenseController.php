@@ -10,6 +10,15 @@ use yii\web\NotFoundHttpException;
 class ExpenseController extends \yii\rest\ActiveController
 {
    public $modelClass = 'app\models\Expense';
+   
+   public function behaviors(){
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class'=> \yii\filters\auth\HttpBearerAuth::className(),
+        ] ;
+        return $behaviors;
+   }
+
 
    public function actions(){
         $actions = parent::actions();
