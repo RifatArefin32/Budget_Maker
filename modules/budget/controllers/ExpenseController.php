@@ -2,6 +2,8 @@
 
 namespace app\modules\budget\controllers;
 use app\models\Expense;
+use app\models\User;
+
 use Yii;
 use yii\web\NotFoundHttpException;
 /**
@@ -11,13 +13,106 @@ class ExpenseController extends \yii\rest\ActiveController
 {
    public $modelClass = 'app\models\Expense';
    
-   public function behaviors(){
+    // Http Bearer Token Authentication **
+    // public function behaviors(){
+    //         $behaviors = parent::behaviors();
+    //         $behaviors['authenticator'] = [
+    //             'class'=> \yii\filters\auth\HttpBearerAuth::className(),
+    //         ] ;
+    //         return $behaviors;
+    // }
+
+    // Http Basic Authentication with access-token**
+    // public function behaviors(){
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class'=> \yii\filters\auth\HttpBasicAuth::className(),
+    //     ] ;
+    //     return $behaviors;
+    // }
+
+    // Http Basic Authentication with username, password**
+    // public function behaviors(){
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class'=> \yii\filters\auth\HttpBasicAuth::className(),
+    //         'auth' => function ($username, $password) {
+    //                 $user = User::find()->where(['username' => $username])->one();
+    //                 if ($user && $user->validatePassword($password)) {
+    //                     return $user;
+    //                 }
+    //                 return null;
+    //             },
+    //     ] ;
+    //     return $behaviors;
+    // }
+
+    // Http Query Param Authentication **
+    // public function behaviors(){
+
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class'=> \yii\filters\auth\QueryParamAuth::className(),
+    //         // usually it takes "access-token" as the parameter but we can 
+    //         // change it as well.
+    //         // 'tokenParam'=> 'auth_key',
+    //         'tokenParam'=> 'test_api'
+    //     ];
+    //     return $behaviors;
+    // }
+
+    // Http Composite Authentication **
+    // public function behaviors(){
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class' => \yii\filters\auth\CompositeAuth::class,
+    //         'authMethods' => [
+    //             [
+    //                 'class'=> \yii\filters\auth\HttpBasicAuth::class,
+    //                 'auth' => function ($username, $password) {
+    //                     $user = User::find()->where(['username' => $username])->one();
+    //                     if ($user && $user->validatePassword($password)) {
+    //                         return $user;
+    //                     }
+    //                     return null;
+    //                 },
+    //             ],
+    //             \yii\filters\auth\HttpBasicAuth::class,
+    //             \yii\filters\auth\QueryParamAuth::class, //can access by access-token param.
+    //         ],
+    //     ];
+    //     return $behaviors;
+    // }
+
+    // Http Exclue End Point Authentication **
+    // public function behaviors(){
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class' => \yii\filters\auth\HttpBasicAuth::class,
+    //         'except'=> ['test'],
+    //     ];
+    //     return $behaviors;
+    // }
+
+    // Http Optional End Point Authentication **
+    // public function behaviors(){
+    //     $behaviors = parent::behaviors();
+    //     $behaviors['authenticator'] = [
+    //         'class' => \yii\filters\auth\HttpBasicAuth::class,
+    //         'optional'=> ['test'],
+    //     ];
+    //     return $behaviors;
+    // }
+
+     // Http Specific End Point Authentication **
+     public function behaviors(){
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
-            'class'=> \yii\filters\auth\HttpBearerAuth::className(),
-        ] ;
+            'class' => \yii\filters\auth\HttpBasicAuth::class,
+            'only'=> ['test', 'check', 'create'],
+        ];
         return $behaviors;
-   }
+    }
 
 
    public function actions(){
@@ -95,4 +190,17 @@ class ExpenseController extends \yii\rest\ActiveController
         }
         throw new NotFoundHttpException('The requested expense field does not exist.');
     }
+
+    public function actionTest(){
+        return [
+            'message' => 'This is Test action',
+        ] ;
+    }
+
+    public function actionCheck(){
+        return [
+            'message' => 'This is Check action',
+        ] ;
+    }
+    
 }
