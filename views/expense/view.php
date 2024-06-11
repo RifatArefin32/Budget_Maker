@@ -6,6 +6,16 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var app\models\Expense $model */
 
+
+// Convert time(H:i:s) from timestamp
+$updated_time = $model->updated_at;
+$model->updated_at = date("d-m-Y | H:i:s", $updated_time);
+
+$created_time = $model->created_at;
+$model->created_at = date("d-m-Y | H:i:s", $created_time);
+
+
+
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Expenses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,6 +24,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="expense-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            // 'id',
+            // 'title',
+            'amount',
+            'spent',
+            'remianing',
+            'created_at',
+            'updated_at',
+        ],
+    ]) ?>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -24,19 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::button('Go Back', ['class' => 'btn btn-success', 'onclick' => 'history.go(-1);']); ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'title',
-            'amount',
-            'spent',
-            'remianing',
-            'created_at',
-            'updated_at',
-        ],
-    ]) ?>
 
 </div>

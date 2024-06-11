@@ -17,17 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Add New Expense Field', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        // 'filterModel' => $searchModel,
         'columns' => [
-            // ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\SerialColumn'],
             //'id',
             'title',
             'amount',
@@ -35,14 +31,45 @@ $this->params['breadcrumbs'][] = $this->title;
             'remianing',
             //'created_at',
             //'updated_at',
+            // [
+            //     'class' => ActionColumn::className(),
+            //     'urlCreator' => function ($action, Expense $model, $key, $index, $column) {
+            //         return Url::toRoute([$action, 'id' => $model->id]);
+            //      }
+            // ],
+            // [
+            //     'attribute' => 'Update',
+            //     'label' => 'Update',
+            //     'format' => 'raw',
+            //     'value' => function ($model) {
+            //         return Html::a('Update', ['expense/update', 'id' => $model->id], ['class' => 'btn btn-warning']);    
+            //     },
+            // ],
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Expense $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'attribute' => 'custom_actions',
+                'label' => 'Custom Actions',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $buttons = '';
+    
+                    // First button
+                    $buttons .= Html::a('View', ['expense/view', 'id' => $model->id], ['class' => 'btn btn-primary']) . ' ';
+    
+                    // Second button
+                    $buttons .= Html::a('Update', ['expense/update', 'id' => $model->id], ['class' => 'btn btn-warning']) . ' ';
+    
+                    // Third button
+                    $buttons .= Html::a('Delete', ['expense/delete', 'id' => $model->id], ['class' => 'btn btn-success']);
+    
+                    return $buttons;
+                },
             ],
         ],
     ]); ?>
+
+    <p>
+        <?= Html::a('Add New Expense Field', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
 
 </div>
