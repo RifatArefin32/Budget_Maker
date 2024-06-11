@@ -1,9 +1,8 @@
-## Step by Step to build the project
+## Setup and Configure the web.php
 - First setup the db.php [connect the database]
 - Config the web.php file
 
-<br>
-
+## User Signup and Login
 - Create migration of User
 - Create a model class "User"
 - Create a model class "SignupForm"
@@ -11,13 +10,12 @@
 - Create a action function @ SiteController
 - Try Signup and login
 
-<br>
-
+## User CRUD using REST 
 - Now Create UserController to CRUD user
 - Configure the web.php to perform REST
 - Use postman to check the CRUD of users
 
-## Follow the following steps for implementing the basics of REST 
+## Expense CRUD using UI and REST (using Modules) 
 - Create a table "expense" using migration
 - Generate a Model and CRUD files using gii
 - Generate a module and Create a ExpenseController
@@ -25,7 +23,7 @@
 - Perfrom GET request for expense/ particular expense
 - Configure the request to define the parsers at config/web.php
 - Create "modules/budget/controller/ExpenseController" and make Create, Update, Delete function
-- Http Bearar Token Authentication
+- Apply different types of http authentication
     
 
 ## Follow Step by Step to Learn Yii2 REST Basics
