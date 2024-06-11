@@ -84,6 +84,19 @@ class UserController extends ActiveController
         }
     }
 
+    // if (Yii::$app->user->isGuest) {
+    //     return $this->redirect(['site/index']);
+    // }
+
+    public function actionDeleteAll()
+    {
+        User::deleteAll();
+        return [
+            'status' => 'success',
+            'message' => 'All users are deleted successfully.',
+        ];    
+    }
+
     protected function findModel($id)
     {
         if (($model = User::findOne($id)) !== null) {
