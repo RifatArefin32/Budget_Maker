@@ -17,7 +17,7 @@ class ExpenseSearch extends Expense
     public function rules()
     {
         return [
-            [['id', 'amount', 'spent', 'remianing', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'amount', 'spent', 'remianing', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['title'], 'safe'],
         ];
     }
@@ -64,6 +64,8 @@ class ExpenseSearch extends Expense
             'remianing' => $this->remianing,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            // 'created_by' => $this->created_by,
+            // 'updated_by' => $this->updated_by,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

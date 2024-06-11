@@ -35,6 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'remianing',
             'created_at',
             'updated_at',
+            'created_by',
+            'updated_by',
         ],
     ]) ?>
 

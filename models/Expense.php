@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "expense".
@@ -40,7 +41,8 @@ class Expense extends \yii\db\ActiveRecord
 
     public function behaviors(){
         return [
-            'timestamp'=> TimestampBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
         ];
     }
     /**
@@ -56,6 +58,8 @@ class Expense extends \yii\db\ActiveRecord
             'remianing' => 'Remianing',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'created_by' => 'Created At',
+            'updated_by' => 'Updated At',
         ];
     }
 

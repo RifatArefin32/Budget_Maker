@@ -18,9 +18,13 @@ class m240610_095810_budget extends Migration
             'amount'=> $this->integer(11)->notNull()->defaultValue(0),
             'spent'=> $this->integer(11)->notNull()->defaultValue(0),
             'remianing'=> $this->integer(11)->notNull()->defaultValue(0),
-            'created_at'=> $this->integer()->notNull()->defaultValue(0),
-            'updated_at'=> $this->integer()->notNull()->defaultValue(0),
+            'created_at'=> $this->integer()->notNull(),
+            'updated_at'=> $this->integer()->notNull(),
+            'created_by' => $this->integer(11)->notNull(),
+            'updated_by'=> $this->integer(11)->notNull(),
         ]);
+
+        $this->addForeignKey('FK_expense','expense','created_by','user','id','CASCADE','CASCADE');
     }
 
     /**
