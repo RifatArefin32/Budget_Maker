@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Html;
 /** @var yii\web\View $this */
 
 $this->title = 'My Yii Application';
@@ -9,9 +10,18 @@ $this->title = 'My Yii Application';
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
         <h1 class="display-4">Budget Maker</h1>
 
-        <p class="lead">Make your budget here</p>
-
-        <!-- <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p> -->
+        <p class="lead">Make your monthy budget here</p>
+        
+        <p>
+            <?php 
+                if(Yii::$app->user->isGuest){
+                    echo Html::a('Login First', ['site/login'], ['class'=> 'btn btn-success']);
+                }
+                else{
+                    echo Html::a('Let\'s start', ['expense/index'], ['class' => 'btn btn-success']);
+                }
+            ?>
+        </p> 
     </div>
 
     <div class="body-content">
