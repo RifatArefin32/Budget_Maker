@@ -16,7 +16,7 @@ $config = [
     //This is necessary for configuring module
     'modules' => [
         'budget' => [
-            'class' => 'app\modules\budget\Budget',
+            'class' => 'app\modules\budget\Module',
         ],
         // other modules...
     ],
@@ -25,6 +25,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'SF7K9RZLqO_G14h9Emf6sh7k58GcVO5x',
+            
             //this is necessary for REST input as JSON
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser', 
