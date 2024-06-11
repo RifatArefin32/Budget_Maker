@@ -98,9 +98,12 @@ class ExpenseController extends Controller
 
         if($this->request->isPost) {
             if($model->load($this->request->post())) {
-                $model->remainingAmount();
                 $addNew = \Yii::$app->request->post('addnew');
+                if(!$addNew){
+                    $addNew = 0;
+                }
                 $model->spent += $addNew;
+                $model->remainingAmount();
                 if($model->validate() && $model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }

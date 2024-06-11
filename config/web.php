@@ -69,6 +69,7 @@ $config = [
 ]
     ],
     'params' => $params,
+    'timeZone' => 'Asia/Dhaka',
 ];
 
 if (YII_ENV_DEV) {

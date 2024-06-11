@@ -27,6 +27,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::button('Go Back', ['class' => 'btn btn-primary', 'onclick' => 'history.go(-1);']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>
