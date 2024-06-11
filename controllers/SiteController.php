@@ -6,10 +6,14 @@ use app\models\SignupForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use Zend\Mail\Storage\Message as MailMessage;
+
+
 
 class SiteController extends Controller
 {
@@ -144,5 +148,63 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionAdmin(){
+        // Path to the directory containing .eml files
+        $directory = __DIR__ . '/../runtime/mail/';
+
+        // Get a list of .eml files in the directory
+        $emlFiles = glob($directory . '*.eml');
+
+        // Render the view with the list of .eml files
+        return $this->render('admin', [
+            'emlFiles' => $emlFiles,
+        ]);
+    }
+
+    public function actionEmail($fileName)
+    {
+        $directory = __DIR__ . '/../runtime/mail/';
+        $filePath = Yii::getAlias($directory . $fileName);
+
+        if (!file_exists($filePath)) {
+            throw new NotFoundHttpException('The requested file does not exist.');
+        }
+        // Read the content of the .eml file using Zend\Mail\Storage\Message
+        $message = new MailMessage(['file' => $filePath]);
+
+        // Extract the required fields
+        $from = $message->from;
+        $subject = $message->subject;
+        $date = $message->date;
+        $body = $message->getContent();
+
+        // Render the view to display the .eml content
+        return $this->render('email', [
+            'fileName' => $fileName,
+            'from' => $from,
+            'subject' => $subject,
+            'date' => $date,
+            'body' => $body,
+        ]);
+    }
+
+    public function actionEmailDelete($fileName)
+    {
+        $directory = __DIR__ . '/../runtime/mail/';
+        $filePath = Yii::getAlias($directory . $fileName);
+
+        if (!file_exists($filePath)) {
+            throw new NotFoundHttpException('The requested file does not exist.');
+        }
+
+        if (unlink($filePath)) {
+            Yii::$app->session->setFlash('success', 'Email deleted successfully.');
+        } else {
+            Yii::$app->session->setFlash('error', 'Unable to delete the email.');
+        }
+
+        return $this->redirect(['admin']);
     }
 }

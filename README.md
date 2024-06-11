@@ -37,3 +37,16 @@
 - [Http Exclude End Point Authentication](https://www.youtube.com/watch?v=4eTWJOmqxLI&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=20)
 - [Http Optional End Point Authentication](https://www.youtube.com/watch?v=cJCBoK5SeU8&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=21)
 - [Http Specific End Point Authentication](https://www.youtube.com/watch?v=mw3MR-x2vTs&list=PLMhOp68dQOeaIIuQ6nh-VqjKxmf9RsE18&index=22)
+
+
+## Admin Panel to show mails from Contact
+- Create a function actionAdmin() at SiteController for rendering Admin Page
+- Create a view 'site/admin'
+- Create a two buttons that shows the mail and delete the mail respectively
+- Create a function actionEmailDelete() in the SiteController 
+- Ensure you have the Zend\Mail\Storage\Message class available in your project. 
+- You can install it using Composer if you haven't already: composer require zendframework/zend-mail
+- Create a function actionEmail() at SiteController for rendering Email Page
+- Create a view 'site/email'
+
+
