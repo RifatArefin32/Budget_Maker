@@ -1,5 +1,4 @@
 <?php
-
 /** @var yii\web\View $this */
 /** @var string $content */
 
@@ -19,6 +18,8 @@ $this->registerMetaTag(['name' => 'description', 'content' => $this->params['met
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
 ?>
+
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
@@ -69,14 +70,18 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 </main>
 
+
 <footer id="footer" class="mt-auto py-3 bg-light">
     <div class="container">
         <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+            <div class="col-md-3 text-center text-md-start"> Budget Maker </div>
+            <div class="col-md-3 text-center text-md-center"><?= date('Y') ?> &copy; Rifat Arefin </div>
+            <div class="col-md-3 text-center text-md-end">All rights reserved </div>
+            <div class="col-md-3 text-center text-md-end"><?= Yii::powered() ?></div>
         </div>
     </div>
 </footer>
+
 
 <?php $this->endBody() ?>
 </body>
