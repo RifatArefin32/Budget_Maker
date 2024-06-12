@@ -3,6 +3,7 @@
 - Configure the db.php 
 - Config the web.php file
 
+
 ## User Signup and Login
 - Create migration of User
 - Create a model class "User"
@@ -11,10 +12,12 @@
 - Create a action function @ SiteController
 - Try Signup and login
 
+
 ## User CRUD using REST 
 - Now Create UserController to CRUD user
 - Configure the web.php to perform REST
 - Use postman to check the CRUD of users
+
 
 ## Expense CRUD using UI and REST (using Modules) 
 - Create a table "expense" using migration
@@ -51,3 +54,10 @@
 - Create a view 'site/email'
 
 
+## Add INCOME (Practice Database Operation and REST)
+- Create table 'income_tab' using migration 
+- Create a model for 'income_tab' using gii
+- Create a CRUD for 'income_tab' using gii
+- Add behavior to the 'IncomeTab' model
+- Remove fields that have been found from the behavior from the view (form)
+- Update "income/view.php" that shows the created/updated time 
