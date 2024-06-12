@@ -1,5 +1,6 @@
 ## Setup and Configure the web.php
-- First setup the db.php [connect the database]
+- Create database 'budget_maker_db' at your local server
+- Configure the db.php 
 - Config the web.php file
 
 ## User Signup and Login
